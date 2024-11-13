@@ -22,14 +22,14 @@
         android:layout_height="wrap_content">
         <ImageView
             android:id="@+id/image"
-            android:layout_marginLeft="17dp"
+            android:layout_marginStart="17dp"
             android:src="@drawable/light_blue"
             android:layout_width="35dp"
             android:layout_height="35dp"/>
         <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/status"
             android:layout_gravity="center"
-            android:layout_marginLeft="55dp"
+            android:layout_marginStart="55dp"
             android:thumb="@drawable/switch_style"
             app:track="@drawable/switch_style1"
             android:layout_width="wrap_content"
@@ -38,21 +38,21 @@
     <TextView
         android:id="@+id/name"
         android:textSize="12sp"
-        android:paddingLeft="20dp"
+        android:paddingStart="20dp"
         android:fontFamily="@font/montserrat_bold"
         android:textColor="@color/black"
-        android:text="Свет"
+        android:text="@string/light"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
     <TextView
         android:id="@+id/power"
         android:visibility="visible"
         android:textSize="9sp"
-        android:paddingLeft="20dp"
+        android:paddingStart="20dp"
         android:paddingTop="5dp"
         android:fontFamily="@font/montserrat_bold"
         android:textColor="@color/off"
-        android:text="0% яркость"
+        android:text="@string/zerobright"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 </LinearLayout>

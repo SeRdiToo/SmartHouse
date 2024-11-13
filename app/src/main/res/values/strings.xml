@@ -1,4 +1,45 @@
 <resources>
     <string name="app_name">SmartHouse</string>
     <string name="addressdescription">Добавьте адрес своего дома в формате г. Название города, ул. Название улицы, д. Номер дома</string>
+    <string name="smarthouse"><b>Умный дом</b></string>
+    <string name="email"><b>Электронная почта</b></string>
+    <string name="pass"><b>Пароль</b></string>
+    <string name="reg"><b>Регистрация</b></string>
+    <string name="enter"><b>Войти</b></string>
+    <string name="idname"><b>Имя пользователя</b></string>
+    <string name="createpin"><b>Создайте пин-код</b></string>
+    <string name="out"><b>Выйти</b></string>
+    <string name="one"><b>1</b></string>
+    <string name="two"><b>2</b></string>
+    <string name="three"><b>3</b></string>
+    <string name="four"><b>4</b></string>
+    <string name="five"><b>5</b></string>
+    <string name="six"><b>6</b></string>
+    <string name="seven"><b>7</b></string>
+    <string name="eight"><b>8</b></string>
+    <string name="nine"><b>9</b></string>
+    <string name="addaddress"><b>Добавить адрес</b></string>
+    <string name="address"><b>Адрес</b></string>
+    <string name="save"><b>Сохранить</b></string>
+    <string name="profile"><b>Профиль</b></string>
+    <string name="devicein"><b>Устройства в</b></string>
+    <string name="adddevice"><b>Добавить устройство</b></string>
+    <string name="namedevice"><b>Название устройства</b></string>
+    <string name="iddevice"><b>Идентификатор устройства</b></string>
+    <string name="choosedevice"><b>Выбрать устройство</b></string>
+    <string name="device"><b>Устройство</b></string>
+    <string name="light"><b>Свет</b></string>
+    <string name="bright"><b>% яркость</b></string>
+    <string name="strengh"><b>% мощность</b></string>
+    <string name="progressbright"><b>0             5             10             15             20             25             30             35</b></string>
+    <string name="house"><b>Твой дом</b></string>
+    <string name="adresss"><b>г.Омск, ул.Ленина, д.24</b></string>
+    <string name="rooms"><b>Комнаты</b></string>
+    <string name="addroom"><b>Добавить комнату</b></string>
+    <string name="nameroom"><b>Название комнаты</b></string>
+    <string name="chooseroom"><b>Выбрать комнату</b></string>
+    <string name="zerobright"><b>0% яркость</b></string>
+    <string name="name"><b>name</b></string>
+    <string name="kitchen"><b>Кухня</b></string>
+
 </resources>

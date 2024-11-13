@@ -1,10 +1,117 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".ProfileActivity">
+    <LinearLayout
+        android:padding="18dp"
+        android:orientation="vertical"
+        android:background="#2A2A37"
+        android:layout_width="match_parent"
+        android:layout_height="250dp">
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_weight="1"
+                android:onClick="Back"
+                android:src="@drawable/btnback"
+                android:layout_width="wrap_content"
+                android:layout_height="54dp"/>
+            <TextView
+                android:paddingEnd="40dp"
+                android:fontFamily="@font/montserrat_bold"
+                android:layout_weight="1"
+                android:textColor="@color/white"
+                android:text="@string/profile"
+                android:textSize="18sp"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+    </LinearLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_marginTop="35dp"
+        android:paddingHorizontal="20dp"
+        android:textColorHint="#93939A"
+        app:hintTextColor="#93939A"
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/nameEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:textSize="16sp"
+            android:fontFamily="@font/montserrat_bold"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_marginTop="24dp"
+        android:paddingHorizontal="20dp"
+        android:textColorHint="#93939A"
+        app:hintTextColor="#93939A"
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/emailEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:fontFamily="@font/montserrat_bold"
+            android:inputType="textEmailAddress"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_marginTop="24dp"
+        android:paddingHorizontal="20dp"
+        android:textColorHint="#93939A"
+        app:hintTextColor="#93939A"
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/addressEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:textSize="16sp"
+            android:fontFamily="@font/montserrat_bold"
+            android:textColorHint="#93939A"/>
+    </com.google.android.material.textfield.TextInputLayout>
+    <Button
+        android:layout_marginTop="105dp"
+        android:text="@string/save"
+        android:layout_gravity="center"
+        android:background="@drawable/button_style3"
+        android:paddingVertical="10dp"
+        android:onClick="Save"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:fontFamily="@font/montserrat_bold"
+        android:layout_width="185dp"
+        android:layout_height="wrap_content"/>
+    <Button
+        android:layout_marginTop="20dp"
+        android:text="@string/out"
+        android:layout_gravity="center"
+        android:background="@drawable/button_style4"
+        android:paddingVertical="10dp"
+        android:onClick="Exit"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:fontFamily="@font/montserrat_bold"
+        android:layout_width="185dp"
+        android:layout_height="wrap_content"/>
+</LinearLayout>

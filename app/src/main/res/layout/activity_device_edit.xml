@@ -1,10 +1,132 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
     tools:context=".DeviceEditActivity">
+    <LinearLayout
+        android:padding="18dp"
+        android:orientation="vertical"
+        android:background="#2A2A37"
+        android:layout_width="match_parent"
+        android:layout_height="90dp">
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_weight="1"
+                android:onClick="Back"
+                android:src="@drawable/btnback"
+                android:layout_width="wrap_content"
+                android:layout_height="54dp"/>
+            <TextView
+                android:id="@+id/name"
+                android:paddingEnd="40dp"
+                android:fontFamily="@font/montserrat_bold"
+                android:layout_weight="1"
+                android:textColor="@color/white"
+                android:text="@string/device"
+                android:textSize="18sp"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/fieldEdit"
+        android:layout_marginHorizontal="12dp"
+        android:layout_marginTop="15dp"
+        android:padding="18dp"
+        android:orientation="vertical"
+        android:background="@drawable/editdevice_style"
+        android:layout_width="match_parent"
+        android:layout_height="180dp">
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/image"
+                android:src="@drawable/light_blue"
+                android:layout_width="66dp"
+                android:layout_height="66dp"/>
+            <TextView
+                android:id="@+id/type"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:paddingStart="30dp"
+                android:textSize="18sp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/montserrat_bold"
+                android:text="@string/light"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/status"
+                android:layout_gravity="center"
+                android:layout_marginStart="35dp"
+                android:thumb="@drawable/switch_style"
+                app:track="@drawable/switch_style1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="15dp"/>
+
+        </LinearLayout>
+        <TextView
+            android:id="@+id/powername"
+            android:textSize="9sp"
+            android:fontFamily="@font/montserrat_bold"
+            android:textColor="@color/off"
+            android:gravity="center"
+            android:text="@string/bright"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"/>
+
+        <SeekBar
+            android:id="@+id/power"
+            android:min="0"
+            android:max="100"
+            android:thumbTint="@color/on"
+            android:progressTint="@color/on"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/underseek"
+            android:visibility="invisible"
+            android:textSize="9sp"
+            android:fontFamily="@font/montserrat_bold"
+            android:textColor="@color/off"
+            android:gravity="center"
+            android:text="@string/progressbright"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:visibility="invisible"
+            android:id="@+id/powername1"
+            android:textSize="9sp"
+            android:paddingVertical="10dp"
+            android:fontFamily="@font/montserrat_bold"
+            android:textColor="@color/off"
+            android:gravity="center"
+            android:text="@string/strengh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <SeekBar
+            android:visibility="invisible"
+            android:id="@+id/power1"
+            android:min="0"
+            android:max="100"
+            android:thumbTint="@color/on"
+            android:progressTint="@color/on"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+</LinearLayout>

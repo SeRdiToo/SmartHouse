@@ -1,10 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".RoomActivity">
+    <LinearLayout
+        android:padding="18dp"
+        android:orientation="vertical"
+        android:background="#2A2A37"
+        android:layout_width="match_parent"
+        android:layout_height="90dp">
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_weight="1"
+                android:onClick="Back"
+                android:src="@drawable/btnback"
+                android:layout_width="wrap_content"
+                android:layout_height="54dp"/>
+            <TextView
+                android:paddingEnd="40dp"
+                android:fontFamily="@font/montserrat_bold"
+                android:layout_weight="1"
+                android:textColor="@color/white"
+                android:text="@string/addroom"
+                android:textSize="18sp"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+    </LinearLayout>
+    <EditText
+        android:id="@+id/nameEdit"
+        android:layout_marginTop="28dp"
+        android:textColorHint="@color/off"
+        android:textColor="@color/black"
+        android:fontFamily="@font/montserrat_bold"
+        android:hint="@string/nameroom"
+        android:textSize="14sp"
+        android:layout_marginHorizontal="15dp"
+        android:paddingVertical="15dp"
+        android:paddingHorizontal="5dp"
+        android:background="@drawable/edittext_style"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:fontFamily="@font/montserrat_bold"
+        android:paddingStart="20dp"
+        android:paddingTop="22dp"
+        android:textColor="#93939A"
+        android:textSize="14sp"
+        android:text="@string/chooseroom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <Button
+        android:layout_marginTop="105dp"
+        android:text="@string/save"
+        android:layout_gravity="center"
+        android:background="@drawable/button_style3"
+        android:paddingVertical="10dp"
+        android:onClick="Save"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:fontFamily="@font/montserrat_bold"
+        android:layout_width="185dp"
+        android:layout_height="wrap_content"/>
+</LinearLayout>

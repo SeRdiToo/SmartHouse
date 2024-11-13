@@ -1,10 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".AddressActivity">
+    <TextView
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:fontFamily="@font/montserrat_bold"
+        android:textSize="18sp"
+        android:textAlignment="center"
+        android:text="@string/addaddress"
+        android:background="#2A2A37"
+        android:layout_width="match_parent"
+        android:layout_height="90dp">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </TextView>
+    <TextView
+        android:layout_marginTop="100dp"
+        android:textColor="@color/black"
+        android:fontFamily="@font/montserrat_bold"
+        android:textSize="14sp"
+        android:padding="15dp"
+        android:textAlignment="center"
+        android:text="@string/addressdescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <EditText
+        android:id="@+id/addressEdit"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/black"
+        android:fontFamily="@font/montserrat_bold"
+        android:hint="@string/address"
+        android:textSize="14sp"
+        android:inputType="textPersonName"
+        android:layout_marginHorizontal="15dp"
+        android:padding="15dp"
+        android:background="@drawable/edittext_style"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <Button
+        android:layout_marginTop="200dp"
+        android:text="@string/save"
+        android:layout_gravity="center"
+        android:background="@drawable/button_style3"
+        android:paddingVertical="10dp"
+        android:onClick="Save"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:fontFamily="@font/montserrat_bold"
+        android:layout_width="185dp"
+        android:layout_height="wrap_content"/>
+
+
+</LinearLayout>
