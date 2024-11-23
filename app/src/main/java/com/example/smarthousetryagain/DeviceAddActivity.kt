@@ -39,7 +39,7 @@ class DeviceAddActivity : AppCompatActivity() {
     private lateinit var nameEdit: EditText
     private lateinit var identifierEdit: EditText
     var devicetypeid:String=""
-    var roomid:Int=0
+    var roomid:String=""
     private val adapter = AdapterDeviceType(viewItems, this@DeviceAddActivity,object:AdapterDeviceType.ItemClickListener
     {
         override fun OnItemClick(typeId:String){
@@ -78,7 +78,7 @@ class DeviceAddActivity : AppCompatActivity() {
     }
 
     fun Back(view: View){
-        roomid = intent.getStringExtra("roomid")
+        roomid = intent.getStringExtra("roomid").toString()
         val intent = Intent(this@DeviceAddActivity, DeviceActivity::class.java)
         intent.putExtra("roomid", roomid)
         startActivity(intent)
