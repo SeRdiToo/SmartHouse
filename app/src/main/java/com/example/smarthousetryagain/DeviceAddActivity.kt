@@ -38,30 +38,25 @@ class DeviceAddActivity : AppCompatActivity() {
     var viewItems: ArrayList<DataDeviceType> = ArrayList()
     private lateinit var nameEdit: EditText
     private lateinit var identifierEdit: EditText
-    var devicetypeid:String=""
-    var roomid:String=""
-    private val adapter = AdapterDeviceType(viewItems, this@DeviceAddActivity,object:AdapterDeviceType.ItemClickListener
-    {
-        override fun OnItemClick(typeId:String){
-            devicetypeid= typeId
-        }
-    })
-   /* val client = createSupabaseClient(
-        supabaseUrl = "https://ihyknrqszskicibjrtiv.supabase.co",
-        supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImloeWtucnFzenNraWNpYmpydGl2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzIyMTMxNjMsImV4cCI6MjA0Nzc4OTE2M30.fTYsD-bhpuEDLCNwfynB6YpBHpY9G9E164UoBRWEdAw"
-    ) {
-        install(GoTrue)
-        install(Postgrest)
-        install(Storage)
-    }*/
+    var devicetypeid: String = ""
+    var roomid: String = ""
+    private val adapter = AdapterDeviceType(
+        viewItems,
+        this@DeviceAddActivity,
+        object : AdapterDeviceType.ItemClickListener {
+            override fun OnItemClick(typeId: String) {
+                devicetypeid = typeId
+            }
+        })
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_device_add)
 
-        nameEdit=findViewById(R.id.nameEdit)
-        identifierEdit=findViewById(R.id.identifierEdit)
+        nameEdit = findViewById(R.id.nameEdit)
+        identifierEdit = findViewById(R.id.identifierEdit)
         val recyclerView: RecyclerView = findViewById(R.id.recycler)
-        recyclerView.layoutManager= GridLayoutManager(this,3)
+        recyclerView.layoutManager = GridLayoutManager(this, 3)
         try {
             lifecycleScope.launch {
                 val client = sb.getSB().postgrest["Device_type"].select()
@@ -70,36 +65,44 @@ class DeviceAddActivity : AppCompatActivity() {
                 array = JSONArray(buf_client.toString())
                 addItemsFromJSON()
             }
-        }
-        catch (e: Exception){
+        } catch (e: Exception) {
             Log.e("!Device_type!", e.toString())
         }
         recyclerView.adapter = adapter
     }
 
-    fun Back(view: View){
+    fun Back(view: View) {
         roomid = intent.getStringExtra("roomid").toString()
         val intent = Intent(this@DeviceAddActivity, DeviceActivity::class.java)
         intent.putExtra("roomid", roomid)
         startActivity(intent)
     }
 
-    fun Save(view: View){
-        if(nameEdit.text.toString()!="" && identifierEdit.text.toString()!=""){
-            lifecycleScope.launch{
+    fun Save(view: View) {
+        if (nameEdit.text.toString() != "" && identifierEdit.text.toString() != "") {
+            lifecycleScope.launch {
                 roomid = intent.getStringExtra("roomid").toString()
                 try {
-                    val deviceadd = DataDeviceAdd(name = nameEdit.text.toString(), identifier = identifierEdit.text.toString(), power = "0", power1 = "0", status = "false", device_type_id = devicetypeid, room_id = roomid)
+                    val deviceadd = DataDeviceAdd(
+                        name = nameEdit.text.toString(),
+                        identifier = identifierEdit.text.toString(),
+                        power = "0",
+                        power1 = "0",
+                        status = "false",
+                        device_type_id = devicetypeid,
+                        room_id = roomid
+                    )
                     sb.getSB().postgrest["Device"].insert(deviceadd)
                     val intent = Intent(this@DeviceAddActivity, DeviceActivity::class.java)
                     intent.putExtra("roomid", roomid)
                     startActivity(intent)
-                }catch (e: Exception){
-                    Log.e("Message",e.toString())
+                } catch (e: Exception) {
+                    Log.e("Message", e.toString())
                 }
             }
-        }else Toast.makeText(this, "Ошибка, не все поля заполнены!", Toast.LENGTH_SHORT).show()
+        } else Toast.makeText(this, "Ошибка, не все поля заполнены!", Toast.LENGTH_SHORT).show()
     }
+
     private fun addItemsFromJSON() {
         try {
             for (i in 0 until array!!.length()) {
@@ -113,12 +116,12 @@ class DeviceAddActivity : AppCompatActivity() {
                         val bytes = bucket.downloadPublic(avatar)
                         val is1: InputStream = ByteArrayInputStream(bytes)
                         val bmp: Bitmap = BitmapFactory.decodeStream(is1)
-                        val dr = BitmapDrawable(resources,bmp)
-                        val device = DataDeviceType(id, avatar,dr,name)
+                        val dr = BitmapDrawable(resources, bmp)
+                        val device = DataDeviceType(id, avatar, dr, name)
                         adapter.notifyDataSetChanged()
                         viewItems.add(device)
-                    }catch (e:Exception){
-                        Log.e("MESSAGE",e.toString())
+                    } catch (e: Exception) {
+                        Log.e("MESSAGE", e.toString())
                     }
                 }
             }

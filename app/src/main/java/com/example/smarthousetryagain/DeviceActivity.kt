@@ -40,38 +40,39 @@ import java.io.InputStream
 import java.lang.Exception
 
 class DeviceActivity : AppCompatActivity() {
-    private lateinit var name:TextView
-    var roomid:String=""
+    private lateinit var name: TextView
+    var roomid: String = ""
     var array: JSONArray? = null
     var viewItems: ArrayList<DataDevice> = ArrayList()
-    private val adapter = AdapterDevice(viewItems,this@DeviceActivity,lifecycleScope)
+    private val adapter = AdapterDevice(viewItems, this@DeviceActivity, lifecycleScope)
     val client = createSupabaseClient(
         supabaseUrl = "https://ihyknrqszskicibjrtiv.supabase.co",
         supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImloeWtucnFzenNraWNpYmpydGl2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzIyMTMxNjMsImV4cCI6MjA0Nzc4OTE2M30.fTYsD-bhpuEDLCNwfynB6YpBHpY9G9E164UoBRWEdAw"
-    ){
+    ) {
         install(GoTrue)
         install(Postgrest)
         install(Storage)
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_device)
         name = findViewById(R.id.name)
         val recyclerView: RecyclerView = findViewById(R.id.recycler)
-        recyclerView.layoutManager= GridLayoutManager(this,2)
-        lifecycleScope.launch{
+        recyclerView.layoutManager = GridLayoutManager(this, 2)
+        lifecycleScope.launch {
             roomid = intent.getStringExtra("roomid").toString()
             try {
-                val device = client.postgrest["Room"].select(columns = Columns.list("id", "name")){
-                    eq("id",roomid)
+                val device = client.postgrest["Room"].select(columns = Columns.list("id", "name")) {
+                    eq("id", roomid)
                 }.body.toString()
                 val array = JSONArray(device)
                 val obj = array.getJSONObject(0)
                 val nameroom = obj.getString("name")
                 // Toast.makeText(this, room.name, Toast.LENGTH_SHORT).show()
                 name.setText("Устройства в $nameroom")
-            }catch (e: Exception){
-                Log.e("Message",e.toString())
+            } catch (e: Exception) {
+                Log.e("Message", e.toString())
             }
         }
 
@@ -79,19 +80,20 @@ class DeviceActivity : AppCompatActivity() {
         lifecycleScope.launch {
             roomid = intent.getStringExtra("roomid").toString()
             try {
-                val client = client.postgrest["Device"].select(){
-                    eq("room_id",roomid)
+                val client = client.postgrest["Device"].select() {
+                    eq("room_id", roomid)
                 }
                 val buf_client = StringBuilder()
                 buf_client.append(client.body.toString()).append("\n")
                 array = JSONArray(buf_client.toString())
                 addItemsFromJSON()
-            }catch (e: Exception){
+            } catch (e: Exception) {
                 Log.e("!Device!", e.toString())
             }
         }
         recyclerView.adapter = adapter
     }
+
     private fun addItemsFromJSON() {
         try {
 // Заполняем Модель спаршенными данными
@@ -110,23 +112,26 @@ class DeviceActivity : AppCompatActivity() {
                         val bytes = bucket.downloadPublic(img)
                         val is1: InputStream = ByteArrayInputStream(bytes)
                         val bmp: Bitmap = BitmapFactory.decodeStream(is1)
-                        val dr = BitmapDrawable(resources,bmp)
-                        val devices = DataDevice(id, name,devices_type_id, img,dr,room_id,status,power)
+                        val dr = BitmapDrawable(resources, bmp)
+                        val devices =
+                            DataDevice(id, name, devices_type_id, img, dr, room_id, status, power)
                         adapter.notifyDataSetChanged()
                         viewItems.add(devices)
-                    }catch (e:Exception){
-                        Log.e("MESSAGE",e.toString())
+                    } catch (e: Exception) {
+                        Log.e("MESSAGE", e.toString())
                     }
                 }
             }
         } catch (e: JSONException) {
         }
     }
-    fun Back(view: View){
+
+    fun Back(view: View) {
         val intent = Intent(this, MainScreen::class.java)
         startActivity(intent)
     }
-    fun Add(view: View){
+
+    fun Add(view: View) {
         roomid = intent.getStringExtra("roomid").toString()
         val intent = Intent(this@DeviceActivity, DeviceAddActivity::class.java)
         intent.putExtra("roomid", roomid)

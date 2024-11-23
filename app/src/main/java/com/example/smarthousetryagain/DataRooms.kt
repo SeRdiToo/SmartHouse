@@ -11,6 +11,7 @@ data class DataRooms(
     val user_id: String,
     //val avatar: String
 )
+
 @Serializable
 data class DataRoomsPOST(
     val name: String,

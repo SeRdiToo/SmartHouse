@@ -14,15 +14,19 @@ import androidx.recyclerview.widget.RecyclerView
 
 import com.example.smarthousetryagain.DataRoomsType
 
-class AdapterRoomsType(private val typesList: ArrayList<DataRoomsTypeWithImages>, private val context: Context, private val itemClickListener: ItemClickListener
-):RecyclerView.Adapter<AdapterRoomsType.MyViewHolder>()
-{
-    private var pos:Int = 0
-    interface ItemClickListener{
-        fun OnItemClick(typeId: Int){
+class AdapterRoomsType(
+    private val typesList: ArrayList<DataRoomsTypeWithImages>,
+    private val context: Context,
+    private val itemClickListener: ItemClickListener
+) : RecyclerView.Adapter<AdapterRoomsType.MyViewHolder>() {
+    private var pos: Int = 0
+
+    interface ItemClickListener {
+        fun OnItemClick(typeId: Int) {
         }
     }
-    inner class MyViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
+
+    inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var id: TextView = itemView.findViewById(R.id.id)
         var name: TextView = itemView.findViewById(R.id.name)
         var avatar: TextView = itemView.findViewById(R.id.avatar)
@@ -34,20 +38,22 @@ class AdapterRoomsType(private val typesList: ArrayList<DataRoomsTypeWithImages>
         return MyViewHolder(v)
     }
 
-    override fun onBindViewHolder(holder: MyViewHolder, @SuppressLint("RecyclerView") position: Int) {
+    override fun onBindViewHolder(
+        holder: MyViewHolder,
+        @SuppressLint("RecyclerView") position: Int
+    ) {
 
-        val on = ContextCompat.getColor(context,R.color.on)
-        val off = ContextCompat.getColor(context,R.color.off)
+        val on = ContextCompat.getColor(context, R.color.on)
+        val off = ContextCompat.getColor(context, R.color.off)
         val types = typesList[position]
         holder.id.text = types.room_id.toString()
         holder.name.text = types.type.toString()
         holder.avatar.text = types.avatar.toString()
         holder.image.setImageDrawable(types.avatar)
-        if(position==pos){
+        if (position == pos) {
             holder.name.setTextColor(on)
             holder.image.setColorFilter(on)
-        }
-        else{
+        } else {
             holder.name.setTextColor(off)
             holder.image.setColorFilter(off)
         }
@@ -58,6 +64,7 @@ class AdapterRoomsType(private val typesList: ArrayList<DataRoomsTypeWithImages>
         }
 
     }
+
     override fun getItemCount(): Int {
         return typesList.size
     }

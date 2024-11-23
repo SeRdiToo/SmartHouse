@@ -23,7 +23,7 @@ import java.lang.Exception
 
 class AddressActivity : AppCompatActivity() {
     lateinit var sharedPreferences: SharedPreferences
-    lateinit var addressEdit:EditText
+    lateinit var addressEdit: EditText
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,26 +33,24 @@ class AddressActivity : AppCompatActivity() {
         addressEdit = findViewById(R.id.addressEdit)
     }
 
-    fun Save(view: View){
+    fun Save(view: View) {
 
         lifecycleScope.launch {
             try {
 
                 val user = sb.getSB().gotrue.retrieveUserForCurrentSession(updateSession = true)
-                Log.e("UserInAdress",user.id.toString())
-                sb.getSB().postgrest["Profiles"].update(
-                    {
-                        set("adress", addressEdit.text.toString())
-                    }
-                ) {
+                Log.e("UserInAdress", user.id.toString())
+                sb.getSB().postgrest["Profiles"].update({
+                    set("adress", addressEdit.text.toString())
+                }) {
                     eq("id", user.id)
                 }
                 val isAdd = true
-                val editor:SharedPreferences.Editor = sharedPreferences.edit()
-                editor.putBoolean("ISADDRESSED",isAdd)
+                val editor: SharedPreferences.Editor = sharedPreferences.edit()
+                editor.putBoolean("ISADDRESSED", isAdd)
                 editor.apply()
-            }catch (e:Exception){
-                Log.e("ErrorProfileAdress",e.toString())
+            } catch (e: Exception) {
+                Log.e("ErrorProfileAdress", e.toString())
             }
         }
         val intent = Intent(this@AddressActivity, MainScreen::class.java)

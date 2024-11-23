@@ -10,12 +10,13 @@ object sb {
     val client = createSupabaseClient(
         supabaseUrl = "https://ihyknrqszskicibjrtiv.supabase.co",
         supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImloeWtucnFzenNraWNpYmpydGl2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzIyMTMxNjMsImV4cCI6MjA0Nzc4OTE2M30.fTYsD-bhpuEDLCNwfynB6YpBHpY9G9E164UoBRWEdAw"
-    ){
+    ) {
         install(GoTrue)
         install(Postgrest)
         install(Storage)
     }
-    public fun getSB() : SupabaseClient{
+
+    public fun getSB(): SupabaseClient {
         return client;
     }
 }

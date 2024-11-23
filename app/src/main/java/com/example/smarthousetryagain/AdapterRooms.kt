@@ -13,12 +13,12 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 
 
-class AdapterRooms(private val roomsListWithImages: ArrayList<DataRoomsWithImages>,private val context: Context
-): RecyclerView.Adapter<AdapterRooms.MyViewHolder>()
-{
-    inner class MyViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
-        var id:TextView=itemView.findViewById(R.id.id)
-        var rooms_type_id:TextView=itemView.findViewById(R.id.rooms_type_id)
+class AdapterRooms(
+    private val roomsListWithImages: ArrayList<DataRoomsWithImages>, private val context: Context
+) : RecyclerView.Adapter<AdapterRooms.MyViewHolder>() {
+    inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        var id: TextView = itemView.findViewById(R.id.id)
+        var rooms_type_id: TextView = itemView.findViewById(R.id.rooms_type_id)
         var name: TextView = itemView.findViewById(R.id.name)
         var image: ImageView = itemView.findViewById(R.id.image)
     }
@@ -31,10 +31,10 @@ class AdapterRooms(private val roomsListWithImages: ArrayList<DataRoomsWithImage
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val rooms = roomsListWithImages[position]
-        holder.id.text=rooms.room_id.toString()
-        holder.rooms_type_id.text=rooms.type_id.toString()
+        holder.id.text = rooms.room_id.toString()
+        holder.rooms_type_id.text = rooms.type_id.toString()
         holder.name.text = rooms.name
-        Log.e("!Adapter",rooms.name )
+        Log.e("!Adapter", rooms.name)
 
         holder.image.setImageDrawable(rooms.images)
         holder.itemView.setOnClickListener {
