@@ -39,21 +39,21 @@ class DeviceAddActivity : AppCompatActivity() {
     private lateinit var nameEdit: EditText
     private lateinit var identifierEdit: EditText
     var devicetypeid:String=""
-    var roomid:String=""
+    var roomid:Int=0
     private val adapter = AdapterDeviceType(viewItems, this@DeviceAddActivity,object:AdapterDeviceType.ItemClickListener
     {
         override fun OnItemClick(typeId:String){
             devicetypeid= typeId
         }
     })
-    val client = createSupabaseClient(
-        supabaseUrl = "https://fogygiutqidwswxezefb.supabase.co",
-        supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZvZ3lnaXV0cWlkd3N3eGV6ZWZiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzE0MzkyODksImV4cCI6MjA0NzAxNTI4OX0.09u_eu_f2zBE9PGxQUJC6zWgJGOoL_5zSJw-JUWkqqY"
+   /* val client = createSupabaseClient(
+        supabaseUrl = "https://ihyknrqszskicibjrtiv.supabase.co",
+        supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImloeWtucnFzenNraWNpYmpydGl2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzIyMTMxNjMsImV4cCI6MjA0Nzc4OTE2M30.fTYsD-bhpuEDLCNwfynB6YpBHpY9G9E164UoBRWEdAw"
     ) {
         install(GoTrue)
         install(Postgrest)
         install(Storage)
-    }
+    }*/
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_device_add)
@@ -64,7 +64,7 @@ class DeviceAddActivity : AppCompatActivity() {
         recyclerView.layoutManager= GridLayoutManager(this,3)
         try {
             lifecycleScope.launch {
-                val client = client.postgrest["Device_type"].select()
+                val client = sb.getSB().postgrest["Device_type"].select()
                 val buf_client = StringBuilder()
                 buf_client.append(client.body.toString()).append("\n")
                 array = JSONArray(buf_client.toString())
@@ -72,13 +72,13 @@ class DeviceAddActivity : AppCompatActivity() {
             }
         }
         catch (e: Exception){
-            Log.e("!!!!!!!", e.toString())
+            Log.e("!Device_type!", e.toString())
         }
         recyclerView.adapter = adapter
     }
 
     fun Back(view: View){
-        roomid = intent.getStringExtra("roomid").toString()
+        roomid = intent.getStringExtra("roomid")
         val intent = Intent(this@DeviceAddActivity, DeviceActivity::class.java)
         intent.putExtra("roomid", roomid)
         startActivity(intent)
@@ -90,7 +90,7 @@ class DeviceAddActivity : AppCompatActivity() {
                 roomid = intent.getStringExtra("roomid").toString()
                 try {
                     val deviceadd = DataDeviceAdd(name = nameEdit.text.toString(), identifier = identifierEdit.text.toString(), power = "0", power1 = "0", status = "false", device_type_id = devicetypeid, room_id = roomid)
-                    client.postgrest["Device"].insert(deviceadd)
+                    sb.getSB().postgrest["Device"].insert(deviceadd)
                     val intent = Intent(this@DeviceAddActivity, DeviceActivity::class.java)
                     intent.putExtra("roomid", roomid)
                     startActivity(intent)
@@ -109,7 +109,7 @@ class DeviceAddActivity : AppCompatActivity() {
                 val name = itemObj.getString("name")
                 lifecycleScope.launch {
                     try {
-                        val bucket = client.storage["Devices_type"]
+                        val bucket = sb.getSB().storage["Devices_type"]
                         val bytes = bucket.downloadPublic(avatar)
                         val is1: InputStream = ByteArrayInputStream(bytes)
                         val bmp: Bitmap = BitmapFactory.decodeStream(is1)

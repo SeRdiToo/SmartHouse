@@ -2,6 +2,7 @@ package com.example.smarthousetryagain
 
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +13,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 
 
-class AdapterRooms(private val roomsList: ArrayList<DataRooms>,private val context: Context
+class AdapterRooms(private val roomsListWithImages: ArrayList<DataRoomsWithImages>,private val context: Context
 ): RecyclerView.Adapter<AdapterRooms.MyViewHolder>()
 {
     inner class MyViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
@@ -27,21 +28,40 @@ class AdapterRooms(private val roomsList: ArrayList<DataRooms>,private val conte
         val v = LayoutInflater.from(parent.context).inflate(R.layout.rooms_list, parent, false)
         return MyViewHolder(v)
     }
-    override fun onBindViewHolder(holder: AdapterRooms.MyViewHolder, position: Int) {
-        val rooms = roomsList[position]
-        holder.id.text=rooms.id
-        holder.rooms_type_id.text=rooms.rooms_type_id
+
+    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+        val rooms = roomsListWithImages[position]
+        holder.id.text=rooms.room_id.toString()
+        holder.rooms_type_id.text=rooms.type_id.toString()
         holder.name.text = rooms.name
-        holder.image.setImageDrawable(rooms.image)
+        Log.e("!Adapter",rooms.name )
+
+        holder.image.setImageDrawable(rooms.images)
         holder.itemView.setOnClickListener {
             val intent = Intent(context, DeviceActivity::class.java).apply {
-                putExtra("roomid", rooms.id)
+                putExtra("roomid", rooms.room_id)
             }
             context.startActivity(intent)
         }
-
     }
+
+    /*    override fun onBindViewHolder(holder: AdapterRooms.MyViewHolder, position: Int) {
+            val rooms = roomsListWithImages[position]
+            holder.id.text=rooms.room_id.toString()
+            holder.rooms_type_id.text=rooms.type_id.toString()
+            holder.name.text = rooms.name
+            Log.e("!Adapter",rooms.name )
+
+           holder.image.setImageDrawable(rooms.images)
+            holder.itemView.setOnClickListener {
+                val intent = Intent(context, DeviceActivity::class.java).apply {
+                    putExtra("roomid", rooms.room_id)
+                }
+                context.startActivity(intent)
+            }
+
+        }*/
     override fun getItemCount(): Int {
-        return roomsList.size
+        return roomsListWithImages.size
     }
 }

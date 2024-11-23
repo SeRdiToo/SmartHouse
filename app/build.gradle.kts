@@ -48,8 +48,8 @@ dependencies {
     implementation("io.github.jan-tennert.supabase:postgrest-kt")
     implementation("io.github.jan-tennert.supabase:realtime-kt")
     implementation("io.github.jan-tennert.supabase:storage-kt")
+    implementation("io.github.jan-tennert.supabase:gotrue-kt")
     implementation("androidx.activity:activity:1.8.0")
-
 
 
     testImplementation("junit:junit:4.13.2")

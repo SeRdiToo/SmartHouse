@@ -8,10 +8,8 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.EditText
-import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 
-import com.example.smarthousetryagain.RegistrationActivity
 import io.github.jan.supabase.createSupabaseClient
 import io.github.jan.supabase.gotrue.GoTrue
 import io.github.jan.supabase.gotrue.gotrue
@@ -22,14 +20,14 @@ import java.lang.Exception
 
 class ProfileActivity : AppCompatActivity() {
     lateinit var sharedPreferences: SharedPreferences
-
+/*
     val client = createSupabaseClient(
-        supabaseUrl = "https://fogygiutqidwswxezefb.supabase.co",
-        supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZvZ3lnaXV0cWlkd3N3eGV6ZWZiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzE0MzkyODksImV4cCI6MjA0NzAxNTI4OX0.09u_eu_f2zBE9PGxQUJC6zWgJGOoL_5zSJw-JUWkqqY"
+        supabaseUrl = "https://ihyknrqszskicibjrtiv.supabase.co",
+        supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImloeWtucnFzenNraWNpYmpydGl2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzIyMTMxNjMsImV4cCI6MjA0Nzc4OTE2M30.fTYsD-bhpuEDLCNwfynB6YpBHpY9G9E164UoBRWEdAw"
     ){
         install(GoTrue)
         install(Postgrest)
-    }
+    }*/
 
     private lateinit var nameEdit:EditText
     private lateinit var emailEdit:EditText
@@ -44,13 +42,13 @@ class ProfileActivity : AppCompatActivity() {
         emailEdit=findViewById(R.id.emailEdit)
         addressEdit=findViewById(R.id.addressEdit)
         lifecycleScope.launch{
-            val userlg = client.gotrue.retrieveUserForCurrentSession(updateSession = true)
+            val userlg = sb.getSB().gotrue.retrieveUserForCurrentSession(updateSession = true)
             try {
-                val user = client.postgrest["User"].select(){
+                val user = sb.getSB().postgrest["profile"].select(){
                     eq("id",userlg.id)
-                }.decodeSingle<Users>()
-                nameEdit.setText(user.name)
-                addressEdit.setText(user.address)
+                }.decodeSingle<Profiles>()
+                nameEdit.setText(user.first_name)
+                addressEdit.setText(user.adress)
                 emailEdit.setText(userlg.email)
             }catch (e: Exception){
                 Log.e("Message",e.toString())
@@ -66,13 +64,13 @@ class ProfileActivity : AppCompatActivity() {
 
         lifecycleScope.launch {
             try {
-                client.gotrue.modifyUser {
+                sb.getSB().gotrue.modifyUser {
                     email = emailEdit.text.toString()
                 }
-                val user = client.gotrue.retrieveUserForCurrentSession(updateSession = true)
-                client.postgrest["User"].update(
+                val user = sb.getSB().gotrue.retrieveUserForCurrentSession(updateSession = true)
+                sb.getSB().postgrest["profile"].update(
                     {
-                        set("address", addressEdit.text.toString())
+                        set("adress", addressEdit.text.toString())
                         set("name", nameEdit.text.toString())
                     }
                 ) {

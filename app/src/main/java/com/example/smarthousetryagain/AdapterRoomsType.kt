@@ -1,6 +1,8 @@
 package com.example.smarthousetryagain
 
+import android.annotation.SuppressLint
 import android.content.Context
+import android.media.Image
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,12 +14,12 @@ import androidx.recyclerview.widget.RecyclerView
 
 import com.example.smarthousetryagain.DataRoomsType
 
-class AdapterRoomsType(private val typesList: ArrayList<DataRoomsType>, private val context: Context, private val itemClickListener: ItemClickListener
+class AdapterRoomsType(private val typesList: ArrayList<DataRoomsTypeWithImages>, private val context: Context, private val itemClickListener: ItemClickListener
 ):RecyclerView.Adapter<AdapterRoomsType.MyViewHolder>()
 {
     private var pos:Int = 0
     interface ItemClickListener{
-        fun OnItemClick(typeId: String){
+        fun OnItemClick(typeId: Int){
         }
     }
     inner class MyViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
@@ -32,15 +34,15 @@ class AdapterRoomsType(private val typesList: ArrayList<DataRoomsType>, private 
         return MyViewHolder(v)
     }
 
-    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: MyViewHolder, @SuppressLint("RecyclerView") position: Int) {
 
         val on = ContextCompat.getColor(context,R.color.on)
         val off = ContextCompat.getColor(context,R.color.off)
         val types = typesList[position]
-        holder.id.text = types.id.toString()
-        holder.name.text = types.name.toString()
+        holder.id.text = types.room_id.toString()
+        holder.name.text = types.type.toString()
         holder.avatar.text = types.avatar.toString()
-        holder.image.setImageDrawable(types.image)
+        holder.image.setImageDrawable(types.avatar)
         if(position==pos){
             holder.name.setTextColor(on)
             holder.image.setColorFilter(on)
@@ -50,7 +52,7 @@ class AdapterRoomsType(private val typesList: ArrayList<DataRoomsType>, private 
             holder.image.setColorFilter(off)
         }
         holder.itemView.setOnClickListener {
-            itemClickListener.OnItemClick(types.id)
+            itemClickListener.OnItemClick(types.room_id)
             pos = position
             notifyDataSetChanged()
         }
@@ -59,4 +61,8 @@ class AdapterRoomsType(private val typesList: ArrayList<DataRoomsType>, private 
     override fun getItemCount(): Int {
         return typesList.size
     }
+}
+
+private fun View.setImageDrawable(image: Image) {
+    TODO("Not yet implemented")
 }

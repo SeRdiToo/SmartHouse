@@ -34,49 +34,67 @@
                 android:layout_height="match_parent"/>
 
         </LinearLayout>
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/avatarkaprofile" />
     </LinearLayout>
-    <com.google.android.material.textfield.TextInputLayout
+
+    <TextView
+        android:id="@+id/textView10"
         android:layout_width="match_parent"
-        android:layout_marginTop="35dp"
-        android:paddingHorizontal="20dp"
-        android:textColorHint="#93939A"
-        app:hintTextColor="#93939A"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:text="@string/idname" />
+
         <EditText
             android:id="@+id/nameEdit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             android:textSize="16sp"
             android:fontFamily="@font/montserrat_bold"/>
-    </com.google.android.material.textfield.TextInputLayout>
 
 
-    <com.google.android.material.textfield.TextInputLayout
+
+    <TextView
+        android:id="@+id/textView11"
         android:layout_width="match_parent"
-        android:layout_marginTop="24dp"
-        android:paddingHorizontal="20dp"
-        android:textColorHint="#93939A"
-        app:hintTextColor="#93939A"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:text="@string/email" />
+
+
         <EditText
             android:id="@+id/emailEdit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="16sp"
             android:fontFamily="@font/montserrat_bold"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             android:inputType="textEmailAddress"/>
-    </com.google.android.material.textfield.TextInputLayout>
 
 
 
-    <com.google.android.material.textfield.TextInputLayout
+    <TextView
+        android:id="@+id/textView12"
         android:layout_width="match_parent"
-        android:layout_marginTop="24dp"
-        android:paddingHorizontal="20dp"
-        android:textColorHint="#93939A"
-        app:hintTextColor="#93939A"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:text="@string/pass" />
+
+
         <EditText
             android:id="@+id/addressEdit"
             android:layout_width="match_parent"
@@ -84,10 +102,12 @@
             android:inputType="textPersonName"
             android:textSize="16sp"
             android:fontFamily="@font/montserrat_bold"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             android:textColorHint="#93939A"/>
-    </com.google.android.material.textfield.TextInputLayout>
+
     <Button
-        android:layout_marginTop="105dp"
+        android:layout_marginTop="60dp"
         android:text="@string/save"
         android:layout_gravity="center"
         android:background="@drawable/button_style3"

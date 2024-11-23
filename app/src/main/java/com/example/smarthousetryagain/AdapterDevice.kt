@@ -22,14 +22,14 @@ import io.github.jan.supabase.gotrue.gotrue
 import io.github.jan.supabase.postgrest.Postgrest
 import io.github.jan.supabase.storage.Storage
 
-val client = createSupabaseClient(
-    supabaseUrl = "https://fogygiutqidwswxezefb.supabase.co",
+/*val client = createSupabaseClient(
+    supabaseUrl = "https://ihyknrqszskicibjrtiv.supabase.co",
     supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZvZ3lnaXV0cWlkd3N3eGV6ZWZiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzE0MzkyODksImV4cCI6MjA0NzAxNTI4OX0.09u_eu_f2zBE9PGxQUJC6zWgJGOoL_5zSJw-JUWkqqY"
 ){
     install(GoTrue)
     install(Postgrest)
     install(Storage)
-}
+}*/
 
 class AdapterDevice(private val devicesList: ArrayList<DataDevice>,private val context: Context,private val lifecycleCoroutineScope: LifecycleCoroutineScope
 ): RecyclerView.Adapter<AdapterDevice.MyViewHolder>() {
@@ -63,7 +63,7 @@ class AdapterDevice(private val devicesList: ArrayList<DataDevice>,private val c
             if (isChecked){
                 lifecycleCoroutineScope.launch {
                     try {
-                        client.postgrest["Device"].update(
+                        sb.getSB().postgrest["Device"].update(
                             {
                                 set("status", "true")
                             }
@@ -78,7 +78,7 @@ class AdapterDevice(private val devicesList: ArrayList<DataDevice>,private val c
             else{
                 lifecycleCoroutineScope.launch {
                     try {
-                        client.postgrest["Device"].update(
+                        sb.getSB().postgrest["Device"].update(
                             {
                                 set("status", "false")
                             }

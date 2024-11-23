@@ -41,7 +41,9 @@ class PinCodeActivity : AppCompatActivity() {
         title = findViewById(R.id.title)
 
         sharedPreferences = getSharedPreferences("SHARED_PREF", Context.MODE_PRIVATE)
-        if(sharedPreferences.getBoolean("ISPINCODED",false)){
+       var te = sharedPreferences.getBoolean("ISPINCODED", false)
+       var te1 =  sharedPreferences.getString("PINCODE","")
+        if(sharedPreferences.getString("PINCODE","")?.length != 0){
             btnExit.visibility = View.VISIBLE
             title.setText("Умный дом")
         }
@@ -49,6 +51,16 @@ class PinCodeActivity : AppCompatActivity() {
             btnExit.visibility = View.INVISIBLE
             title.setText("Создайте пинкод")
         }
+/*        if(sharedPreferences.getBoolean("ISPINCODED",false)){
+            btnExit.visibility = View.VISIBLE
+            title.setText("Умный дом")
+        }
+        else{
+            btnExit.visibility = View.INVISIBLE
+            title.setText("Создайте пинкод")
+        }*/
+        //TODO
+        //title.append("!"+ te.toString() + "|" + te1)
     }
 
     var pincode =""
@@ -75,11 +87,11 @@ class PinCodeActivity : AppCompatActivity() {
             R.id.num6 -> pincode+= "6"
             R.id.num7 -> pincode+= "7"
             R.id.num8 -> pincode+= "8"
-
             R.id.num9 -> pincode+= "9"
         }
         if (pincode.length == 4) {
-            if(!sharedPreferences.getBoolean("ISPINCODED",false)){
+            if (sharedPreferences.getString("PINCODE","")?.length == 0){
+           // if(sharedPreferences.getBoolean("ISPINCODED",false)){
                 val editor:SharedPreferences.Editor = sharedPreferences.edit()
                 editor.putString("PINCODE",pincode)
                 editor.putBoolean("ISPINCODED",true)
@@ -88,12 +100,15 @@ class PinCodeActivity : AppCompatActivity() {
                 startActivity(intent)
             }
             else{
+
+               // val pin = sharedPreferences.getString("PINCODE","");
+
                 if(pincode==sharedPreferences.getString("PINCODE","")){
                     if(sharedPreferences.getBoolean("ISADDRESSED",false)){
-                        val intent = Intent(this@PinCodeActivity, MainScreen::class.java)
+                        val intent = Intent(this@PinCodeActivity, AddressActivity::class.java)
                         startActivity(intent)
                     }else{
-                        val intent = Intent(this@PinCodeActivity, AddressActivity::class.java)
+                        val intent = Intent(this@PinCodeActivity, MainScreen::class.java)
                         startActivity(intent)
                     }
                 }
